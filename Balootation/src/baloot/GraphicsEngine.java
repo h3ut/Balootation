@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
 
     private ArrayList<Card> cards;
-    
+    private Image coveredImage;
     ArrayList<Card> PlayerMe;
     ArrayList<Card> PlayerThemFirst;
     ArrayList<Card> PlayerFriend;
@@ -33,7 +33,7 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     private int us,them;
 
     // Shra
-    private boolean shouldBuy = true;
+    private boolean shouldBuy;
     private Image hokmImage;
     private Image sunImage;
 
@@ -43,7 +43,7 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     
     // Drawing constants
     private final int padding = 20;
-    private boolean showOtherPlayersCards = true;
+    private boolean showOtherPlayersCards = false;
     public GraphicsEngine(){
         anythingClicked = null;
         
@@ -51,10 +51,11 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
         PlayerFriend = new ArrayList();
         PlayerThemFirst = new ArrayList();
         PlayerThemSecond = new ArrayList();
-
-        shouldBuy = true;
+        
+        shouldBuy = false;
         cards = new ArrayList();
         fillTheDeck();
+        getCoveredCardImage();
         getShraImages();
 
 //        for (int i = 0; i < 8; i++) PlayerMe.add(cards.get(i));
@@ -91,6 +92,8 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
             pos = getCardPositionForFriend(i, size);
             if(showOtherPlayersCards)
                 g.drawImage(PlayerFriend.get(i).getImage(), pos.x, pos.y, this);
+            else
+                g.drawImage(coveredImage, pos.x, pos.y, this);
         }
 
         // Draw player them first position
@@ -98,6 +101,8 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
             pos = getCardPositionForThemFirst(i, size);
             if(showOtherPlayersCards)
                 g.drawImage(PlayerThemFirst.get(i).getImage(), pos.x, pos.y, this);
+            else
+                g.drawImage(coveredImage, pos.x, pos.y, this);
         }
 
         // Draw player them second position
@@ -105,6 +110,8 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
             pos = getCardPositionForThemSecond(i, size);
             if(showOtherPlayersCards)
                 g.drawImage(PlayerThemSecond.get(i).getImage(), pos.x, pos.y, this);
+            else
+                g.drawImage(coveredImage, pos.x, pos.y, this);
         }
 
         // Draw played cards //
@@ -420,7 +427,11 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
         sunImage = new ImageIcon(getClass().getResource("cardsimages/sun.gif")).getImage();
     }
 
-
+    private void getCoveredCardImage(){
+        coveredImage = new ImageIcon(getClass().getResource("cardsimages/back_1.gif")).getImage();
+    }
+    
+    
     @Override
     public void run() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
