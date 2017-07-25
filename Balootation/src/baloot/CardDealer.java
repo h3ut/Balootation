@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class CardDealer {
     
     
-    public static ArrayList<ArrayList<Card>> dealCardsNormal(ArrayList<Card> cards, int startDealingFromPlayer){
+    public static CardHolder dealCardsNormal(ArrayList<Card> cards, int startDealingFromPlayer){
         
         ArrayList<ArrayList<Card>> dealedCards = new ArrayList<ArrayList<Card>>();
         
@@ -78,10 +78,11 @@ public class CardDealer {
         }
         
         
-        return dealedCards;
+        return new CardHolder(dealedCards);
     }
     
-    public static ArrayList<ArrayList<Card>> dealRestOfCardsNormal(ArrayList<Card> cards, ArrayList<ArrayList<Card>> dealedCards, int startDealingFromPlayer){
+    public static void dealRestOfCardsNormal(CardHolder cardHolder, ArrayList<Card> cards, int startDealingFromPlayer){
+        ArrayList<ArrayList<Card>> dealedCards = cardHolder.getCardsAll();
         int nextCardToDealIndex = 20;
         
         for (int i = 0; i < 4; i++) {
@@ -113,8 +114,6 @@ public class CardDealer {
                     break;
             }
         }
-        
-        return dealedCards;
     }
     
     

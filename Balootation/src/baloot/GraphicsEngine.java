@@ -341,6 +341,14 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
         this.repaint();
     }
 
+    public void setAllPlayers(CardHolder cardHolder){
+        setPlayerMe(cardHolder.getCardsMe());
+        setPlayerFriend(cardHolder.getCardsFriend());
+        setPlayerThemFirst(cardHolder.getCardsThemFirst());
+        setPlayerThemSecond(cardHolder.getCardsThemSecond());
+    }
+    
+    
     public void setPlayedByPlayerMe(Card playedByPlayerMe) {
         this.playedByPlayerMe = playedByPlayerMe;
     }
