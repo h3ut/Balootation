@@ -13,7 +13,7 @@ public class Baloot {
     public static void main(String[] args) throws InterruptedException {
         
         System.out.println("game is starting...");
-        
+        System.out.println("yeah");
         
         JFrame frame = new JFrame();
         
