@@ -43,7 +43,7 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     
     // Drawing constants
     private final int padding = 20;
-    private boolean showOtherPlayersCards = false;
+    private boolean showOtherPlayersCards = true;
     public GraphicsEngine(){
         anythingClicked = null;
         

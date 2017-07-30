@@ -26,7 +26,7 @@ public class Baloot {
         
         CardShuffler.RandomShuffle(graf.getCards());
         CardHolder cardHolder = CardDealer.dealCardsNormal(graf.getCards(), 3);
-        CardDealer.dealRestOfCardsNormal(cardHolder, graf.getCards(), 3);
+        CardDealer.dealRestOfCardsNormal(cardHolder, graf.getCards(), 3, 0);
         
 //        ArrayList<ArrayList<Card>> dealed = CardDealer.dealCardsNormal(graf.getCards(), 3);
 //        CardDealer.dealRestOfCardsNormal(graf.getCards(), dealed, 3);
@@ -41,18 +41,41 @@ public class Baloot {
         
         
         while(true){
+            
             System.out.println(graf.getUserInput());
-            CardShuffler.threeAces(graf.getCards());
+            CardShuffler.RandomShuffle(graf.getCards());
             cardHolder = CardDealer.dealCardsNormal(graf.getCards(), 3);
-            CardDealer.dealRestOfCardsNormal(cardHolder, graf.getCards(), 3);
-        
+            //CardDealer.dealRestOfCardsNormal(cardHolder, graf.getCards(), 3, 0);
+            graf.setPlayedByPlayerMe(graf.getCards().get(20));
+            
+            cardHolder.sort();
+            graf.setAllPlayers(cardHolder);
+            
+            
+            ObjectClicked userInput = graf.getUserInput();
+            int boughtBy = -1;
+            if(userInput.isHandMe())
+                boughtBy = 0;
+            if(userInput.isHandThemFirst())
+                boughtBy = 1;
+            if(userInput.isHandFriend())
+                boughtBy = 2;
+            if(userInput.isHandThemSecond())
+                boughtBy = 3;
+            CardDealer.dealRestOfCardsNormal(cardHolder, graf.getCards(), 3, boughtBy);
+            
+            
+            
+            
             cardHolder.sort();
 //            Collections.sort(dealed.get(0));
 //            Collections.sort(dealed.get(1));
 //            Collections.sort(dealed.get(2));
 //            Collections.sort(dealed.get(3));
-            
+            graf.setPlayedByPlayerMe(null);
             graf.setAllPlayers(cardHolder);
+            
+            
 //            graf.setPlayerMe(dealed.get(0));
 //            graf.setPlayerThemFirst(dealed.get(1));
 //            graf.setPlayerFriend(dealed.get(2));
