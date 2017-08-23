@@ -29,7 +29,7 @@ public class Card implements Comparable{
     public static final int JACK = 11;
     public static final int QUEEN = 12;
     public static final int KING = 13;
-    public static final int ACE = 20;
+    public static final int ACE = 14;
     
     private final int suit;
     private final int rank;
