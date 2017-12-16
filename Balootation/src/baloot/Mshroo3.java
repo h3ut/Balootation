@@ -12,7 +12,7 @@ public class Mshroo3 {
     static final int m100 = 20;
     static final int m50 = 10;
     static final int mSra = 4;
-    static final int mBaloot = 4;
+    static final int mBaloot = 2;
     
     ArrayList<Card> mshroo3;
     private int type;
@@ -176,18 +176,18 @@ public class Mshroo3 {
     private static boolean checkForSra(ArrayList<Card> playerCards, ArrayList<Mshroo3> mshare3){
         
         // check for 3 consecutive cards
-        ArrayList<Card> consecutiveCards = getConsecutiveCards(playerCards, 4);
+        ArrayList<Card> consecutiveCards = getConsecutiveCards(playerCards, 3);
         if(consecutiveCards != null){
             playerCards.removeAll(consecutiveCards);
-            mshare3.add(new Mshroo3(consecutiveCards, m50));
+            mshare3.add(new Mshroo3(consecutiveCards, mSra));
         }else{
             return false;
         }
         
-        consecutiveCards = getConsecutiveCards(playerCards, 4);
+        consecutiveCards = getConsecutiveCards(playerCards, 3);
         if(consecutiveCards != null){
             playerCards.removeAll(consecutiveCards);
-            mshare3.add(new Mshroo3(consecutiveCards, m50));
+            mshare3.add(new Mshroo3(consecutiveCards, mSra));
         }
         return true;
     }
@@ -312,5 +312,37 @@ public class Mshroo3 {
         
         return mshare3;
     }
+
+    @Override
+    public String toString() {
+        
+        StringBuilder str = new StringBuilder();
+        switch(type){
+            case m400: str.append("400: ");
+                break;
+            case m100: str.append("100: ");
+                break;
+            case m50: str.append("50: ");
+                break;
+            case mSra: str.append("Sra: ");
+                break;
+            case mBaloot: str.append("Baloot: ");
+                break;
+            default:
+                str.append("Error: ");
+        }
+        str.append("{ ");
+        for (int i = 0; i < mshroo3.size(); i++) {
+            str.append("(");
+            str.append(mshroo3.get(i).toString());
+            str.append(")");
+            if(i != mshroo3.size()-1)
+                str.append(", ");
+        }
+        str.append(" }");
+        return str.toString();
+    }
+    
+    
     
 }

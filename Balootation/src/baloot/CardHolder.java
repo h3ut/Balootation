@@ -10,7 +10,8 @@ import java.util.Collections;
 public class CardHolder {
 
     private ArrayList<ArrayList<Card>> cards;
-
+    private ArrayList<ArrayList<Mshroo3>> mshare3;
+    
     public CardHolder(ArrayList<ArrayList<Card>> cards) {
         this.cards = cards;
     }
@@ -23,8 +24,22 @@ public class CardHolder {
         Collections.sort(cards.get(3));
     }
     
+    public void calculateMshare3(int gameType){
+        mshare3 = new ArrayList<ArrayList<Mshroo3>>();
+        
+        mshare3.add(Mshroo3.findAllMshroo3(cards.get(0), gameType));
+        mshare3.add(Mshroo3.findAllMshroo3(cards.get(1), gameType));
+        mshare3.add(Mshroo3.findAllMshroo3(cards.get(2), gameType));
+        mshare3.add(Mshroo3.findAllMshroo3(cards.get(3), gameType));
+    }
+    
+    
     public ArrayList<ArrayList<Card>> getCardsAll(){
         return cards;
+    }
+    
+    public ArrayList<ArrayList<Mshroo3>> getMshare3(){
+        return mshare3;
     }
     
     public ArrayList<Card> getCardsMe(){

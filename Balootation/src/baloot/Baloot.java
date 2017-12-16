@@ -43,8 +43,9 @@ public class Baloot {
         while(true){
             
             System.out.println(graf.getUserInput());
-            CardShuffler.RandomShuffle(graf.getCards());
+            CardShuffler.threeAces(graf.getCards());
             cardHolder = CardDealer.dealCardsNormal(graf.getCards(), 3);
+            
             //CardDealer.dealRestOfCardsNormal(cardHolder, graf.getCards(), 3, 0);
             graf.setPlayedByPlayerMe(graf.getCards().get(20));
             
@@ -68,18 +69,24 @@ public class Baloot {
             
             
             cardHolder.sort();
-//            Collections.sort(dealed.get(0));
-//            Collections.sort(dealed.get(1));
-//            Collections.sort(dealed.get(2));
-//            Collections.sort(dealed.get(3));
+            cardHolder.calculateMshare3(GameType.SUN);
+            
+            ArrayList<ArrayList<Mshroo3>> mshare3 = cardHolder.getMshare3();
+            StringBuilder msh = new StringBuilder();
+            for (int i = 0; i < mshare3.size(); i++) {
+                msh.append("Player " + i + ": [ ");
+                
+                for (int j = 0; j < mshare3.get(i).size(); j++) {
+                    msh.append(mshare3.get(i).get(j).toString());
+                    msh.append(" , ");
+                }
+                msh.append("]\n");
+            }
+            System.out.println(msh.toString());
             graf.setPlayedByPlayerMe(null);
             graf.setAllPlayers(cardHolder);
             
             
-//            graf.setPlayerMe(dealed.get(0));
-//            graf.setPlayerThemFirst(dealed.get(1));
-//            graf.setPlayerFriend(dealed.get(2));
-//            graf.setPlayerThemSecond(dealed.get(3));
         }
         
     }
