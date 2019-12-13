@@ -3,6 +3,7 @@ package com.h3uu.balootation;
 import com.h3uu.balootation.card.Card;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -11,126 +12,43 @@ import java.util.ArrayList;
 public class CardDealer {
     
     
-    public static CardHolder dealCardsNormal(ArrayList<Card> cards, int startDealingFromPlayer){
-        
-        ArrayList<ArrayList<Card>> dealedCards = new ArrayList<>();
-        
-        dealedCards.add(new ArrayList<>());
-        dealedCards.add(new ArrayList<>());
-        dealedCards.add(new ArrayList<>());
-        dealedCards.add(new ArrayList<>());
-        
-        int nextCardToDealIndex = 0;
+    public static CardHolder dealCardsNormal(CardDeck deck, int startDealingFromPlayer){
+
+        ArrayList<ArrayList<Card>> dealtCards = new ArrayList<>();
+
+        dealtCards.add(new ArrayList<>());
+        dealtCards.add(new ArrayList<>());
+        dealtCards.add(new ArrayList<>());
+        dealtCards.add(new ArrayList<>());
+
         for (int i = 0; i < 4; i++) {
             startDealingFromPlayer = (startDealingFromPlayer + 1) % 4;
-            switch(startDealingFromPlayer){
-                case 0: 
-                    
-                    dealedCards.get(0).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(0).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(0).add(cards.get(nextCardToDealIndex++));
-                    break;
-                case 1:  
-                    
-                    dealedCards.get(1).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(1).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(1).add(cards.get(nextCardToDealIndex++));
-                    break;
-                case 2:  
-                    
-                    dealedCards.get(2).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(2).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(2).add(cards.get(nextCardToDealIndex++));
-                    break;
-                case 3:  
-                    
-                    dealedCards.get(3).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(3).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(3).add(cards.get(nextCardToDealIndex++));
-                    break;
-            }
+            dealtCards.get(startDealingFromPlayer).addAll(deck.deal(3));
         }
-        
         
         for (int player = 0; player < 4; player++) {
             startDealingFromPlayer = (startDealingFromPlayer + 1) % 4;
-            switch(startDealingFromPlayer){
-                case 0: 
-                    
-                    dealedCards.get(0).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(0).add(cards.get(nextCardToDealIndex++));
-                    break;
-                case 1:  
-                    
-                    dealedCards.get(1).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(1).add(cards.get(nextCardToDealIndex++));
-                    break;
-                case 2:  
-                    
-                    dealedCards.get(2).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(2).add(cards.get(nextCardToDealIndex++));
-                    break;
-                case 3:  
-                    
-                    dealedCards.get(3).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(3).add(cards.get(nextCardToDealIndex++));
-                    break;
-            }
+            dealtCards.get(startDealingFromPlayer).addAll(deck.deal(2));
         }
         
-        
-        return new CardHolder(dealedCards);
+        return new CardHolder(dealtCards);
     }
     
-    public static void dealRestOfCardsNormal(CardHolder cardHolder, ArrayList<Card> cards, int startDealingFromPlayer, int boughtByPlayer){
-        ArrayList<ArrayList<Card>> dealedCards = cardHolder.getCardsAll();
-        int nextCardToDealIndex = 20;
-        
-        switch(boughtByPlayer){
-            case 0:
-                dealedCards.get(0).add(cards.get(nextCardToDealIndex++));
-                break;
-            case 1:
-                dealedCards.get(1).add(cards.get(nextCardToDealIndex++));
-                break;
-            case 2:
-                dealedCards.get(2).add(cards.get(nextCardToDealIndex++));
-                break;
-            case 3:
-                dealedCards.get(3).add(cards.get(nextCardToDealIndex++));
-                break;
-            default:
-                System.out.println("Dealing cards: invalid bought by player number...");
+    public static void dealRestOfCardsNormal(CardHolder cardHolder, CardDeck deck, int startDealingFromPlayer, int boughtByPlayer){
+        ArrayList<ArrayList<Card>> dealtCards = cardHolder.getCardsAll();
+        if(boughtByPlayer < 0 || boughtByPlayer >= dealtCards.size()){
+            System.err.println("Invalid player bought card. Cannot deal the rest of the cards");
         }
+
+        dealtCards.get(boughtByPlayer).add(deck.dealOneCard());
         
         for (int i = 0; i < 4; i++) {
             startDealingFromPlayer = (startDealingFromPlayer + 1) % 4;
-            switch(startDealingFromPlayer){
-                case 0:                     
-                    dealedCards.get(0).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(0).add(cards.get(nextCardToDealIndex++));
-                    if(boughtByPlayer != 0)
-                        dealedCards.get(0).add(cards.get(nextCardToDealIndex++));
-                    break;
-                case 1:  
-                    dealedCards.get(1).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(1).add(cards.get(nextCardToDealIndex++));
-                    if(boughtByPlayer != 1)
-                        dealedCards.get(1).add(cards.get(nextCardToDealIndex++));
-                    break;
-                case 2:  
-                    dealedCards.get(2).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(2).add(cards.get(nextCardToDealIndex++));
-                    if(boughtByPlayer != 2)
-                        dealedCards.get(2).add(cards.get(nextCardToDealIndex++));
-                    break;
-                case 3:                      
-                    dealedCards.get(3).add(cards.get(nextCardToDealIndex++));
-                    dealedCards.get(3).add(cards.get(nextCardToDealIndex++));
-                    if(boughtByPlayer != 3)
-                        dealedCards.get(3).add(cards.get(nextCardToDealIndex++));
-                    break;
-            }
+
+
+            dealtCards.get(startDealingFromPlayer).addAll(deck.deal((boughtByPlayer == startDealingFromPlayer)? 2: 3));
+
+
         }
     }
     

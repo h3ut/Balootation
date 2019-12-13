@@ -6,6 +6,7 @@ import com.h3uu.balootation.card.Suit;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -14,13 +15,14 @@ import java.util.Collections;
 public class CardShuffler {
     
     // normal random shit
-    public static void RandomShuffle(ArrayList<Card> cards){
-        Collections.shuffle(cards);
+    public static void RandomShuffle(CardDeck deck){
+        Collections.shuffle(deck.getDeck());
     }
     
     // me player will get great cards
-    public static void threeAces(ArrayList<Card> cards){
-        RandomShuffle(cards);
+    public static void threeAces(CardDeck deck){
+        RandomShuffle(deck);
+        List<Card> cards = deck.getDeck();
         for (int myAceNumber = 0; myAceNumber < 3; myAceNumber++) {
             for (int lookForAce = myAceNumber+1; lookForAce < cards.size(); lookForAce++) {
                 if(cards.get(lookForAce).getSuit() == Suit.ACE){

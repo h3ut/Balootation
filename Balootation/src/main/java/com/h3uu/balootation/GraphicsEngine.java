@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
 
     private final String imagesPath = "/cardsimages/";
-    private ArrayList<Card> cards;
     private Image coveredImage;
     private ArrayList<Card> PlayerMe;
     private ArrayList<Card> PlayerThemFirst;
@@ -58,21 +57,8 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
         PlayerThemSecond = new ArrayList<>();
         
         shouldBuy = false;
-        cards = new ArrayList<>();
-        fillTheDeck();
         getCoveredCardImage();
         getShraImages();
-
-//        for (int i = 0; i < 8; i++) PlayerMe.add(cards.get(i));
-//        for (int i = 8; i < 16; i++) PlayerFriend.add(cards.get(i));
-//        for (int i = 16; i < 24; i++) PlayerThemFirst.add(cards.get(i));
-//        for (int i = 24; i < 32; i++) PlayerThemSecond.add(cards.get(i));
-        
-        
-//        playedByPlayerMe = cards.get(0);
-//        playedByPlayerThemFirst = cards.get(1);
-//        playedByPlayerFriend = cards.get(2);
-//        playedByPlayerThemSecond = cards.get(3);
 
         us = 0;
         them = 0;
@@ -365,14 +351,7 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     public void setPlayedByPlayerThemSecond(Card playedByPlayerThemSecond) {
         this.playedByPlayerThemSecond = playedByPlayerThemSecond;
     }
-    
-    
-    public ArrayList<Card> getCards() {
-        return cards;
-    }
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
-    }
+
     public boolean isShouldBuy() {
         return shouldBuy;
     }
@@ -392,23 +371,7 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     public int getThem() {
         return them;
     }
-    
-    
 
-
-    private void fillTheDeck(){
-
-        for(Rank rank: Rank.values()){
-            for(Suit suit: Suit.values()){
-
-                if(suit.getValue() <= 6){
-                    continue;
-                }
-                String path = String.format("%s%s-%s.gif", imagesPath, rank.toString(), suit.toString());
-                cards.add(new Card(rank, suit,new ImageIcon(getClass().getResource(path))));
-            }
-        }
-    }
 
     private void getShraImages(){
         hokmImage = new ImageIcon(getClass().getResource(imagesPath + "7km.gif")).getImage();

@@ -2,6 +2,8 @@ package com.h3uu.balootation;
 
 import com.h3uu.balootation.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -27,9 +29,11 @@ public class Baloot {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addMouseListener(graph);
 
-        CardShuffler.RandomShuffle(graph.getCards());
-        CardHolder cardHolder = CardDealer.dealCardsNormal(graph.getCards(), 3);
-        CardDealer.dealRestOfCardsNormal(cardHolder, graph.getCards(), 3, 0);
+
+        CardDeck deck = new CardDeck();
+        CardShuffler.RandomShuffle(deck);
+        CardHolder cardHolder = CardDealer.dealCardsNormal(deck, 3);
+        CardDealer.dealRestOfCardsNormal(cardHolder, deck, 3, 0);
 
 //        ArrayList<ArrayList<Card>> dealed = CardDealer.dealCardsNormal(graph.getCards(), 3);
 //        CardDealer.dealRestOfCardsNormal(graph.getCards(), dealed, 3);
@@ -46,11 +50,12 @@ public class Baloot {
         while(true){
 
             System.out.println(graph.getUserInput());
-            CardShuffler.threeAces(graph.getCards());
-            cardHolder = CardDealer.dealCardsNormal(graph.getCards(), 3);
+            deck.reset();
+            CardShuffler.threeAces(deck);
+            cardHolder = CardDealer.dealCardsNormal(deck, 3);
 
             //CardDealer.dealRestOfCardsNormal(cardHolder, graph.getCards(), 3, 0);
-            graph.setPlayedByPlayerMe(graph.getCards().get(20));
+            graph.setPlayedByPlayerMe(deck.getDeck().get(20));
 
             cardHolder.sort();
             graph.setAllPlayers(cardHolder);
@@ -66,7 +71,7 @@ public class Baloot {
                 boughtBy = 2;
             if(userInput.isHandThemSecond())
                 boughtBy = 3;
-            CardDealer.dealRestOfCardsNormal(cardHolder, graph.getCards(), 3, boughtBy);
+            CardDealer.dealRestOfCardsNormal(cardHolder, deck, 3, boughtBy);
 
 
 
@@ -81,7 +86,8 @@ public class Baloot {
 
                 for (int j = 0; j < mshare3.get(i).size(); j++) {
                     msh.append(mshare3.get(i).get(j).toString());
-                    msh.append(" , ");
+                    if(j != mshare3.get(i).size() - 1)
+                        msh.append(" , ");
                 }
                 msh.append("]\n");
             }
