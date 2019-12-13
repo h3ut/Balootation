@@ -318,7 +318,7 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     }
     
     public ObjectClicked getUserInput() throws InterruptedException{
-        while(anythingClicked == null) Thread.sleep(100);
+        while(anythingClicked == null) Thread.sleep(50);
         
         ObjectClicked answer = anythingClicked;
         anythingClicked = null;
