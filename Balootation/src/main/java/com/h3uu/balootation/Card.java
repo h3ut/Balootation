@@ -1,4 +1,4 @@
-package baloot;
+package com.h3uu.balootation;
 
 import java.awt.Image;
 import java.awt.Point;
