@@ -48,13 +48,13 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     public GraphicsEngine(){
         anythingClicked = null;
         
-        PlayerMe = new ArrayList();
-        PlayerFriend = new ArrayList();
-        PlayerThemFirst = new ArrayList();
-        PlayerThemSecond = new ArrayList();
+        PlayerMe = new ArrayList<>();
+        PlayerFriend = new ArrayList<>();
+        PlayerThemFirst = new ArrayList<>();
+        PlayerThemSecond = new ArrayList<>();
         
         shouldBuy = false;
-        cards = new ArrayList();
+        cards = new ArrayList<>();
         fillTheDeck();
         getCoveredCardImage();
         getShraImages();
@@ -313,8 +313,7 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     
     private boolean isPointInBox(Point p, Point boxBegin, Point boxEnd){
         if(boxBegin.x <= p.x && p.x <= boxEnd.x)
-            if(boxBegin.y <= p.y && p.y <= boxEnd.y)
-                return true;
+            return boxBegin.y <= p.y && p.y <= boxEnd.y;
         return false;
     }
     

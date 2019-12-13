@@ -25,7 +25,7 @@ public class CardHolder {
     }
     
     public void calculateMshare3(int gameType){
-        mshare3 = new ArrayList<ArrayList<Mshroo3>>();
+        mshare3 = new ArrayList<>();
         
         mshare3.add(Mshroo3.findAllMshroo3(cards.get(0), gameType));
         mshare3.add(Mshroo3.findAllMshroo3(cards.get(1), gameType));

@@ -11,12 +11,12 @@ public class CardDealer {
     
     public static CardHolder dealCardsNormal(ArrayList<Card> cards, int startDealingFromPlayer){
         
-        ArrayList<ArrayList<Card>> dealedCards = new ArrayList<ArrayList<Card>>();
+        ArrayList<ArrayList<Card>> dealedCards = new ArrayList<>();
         
-        dealedCards.add(new ArrayList<Card>());
-        dealedCards.add(new ArrayList<Card>());
-        dealedCards.add(new ArrayList<Card>());
-        dealedCards.add(new ArrayList<Card>());
+        dealedCards.add(new ArrayList<>());
+        dealedCards.add(new ArrayList<>());
+        dealedCards.add(new ArrayList<>());
+        dealedCards.add(new ArrayList<>());
         
         int nextCardToDealIndex = 0;
         for (int i = 0; i < 4; i++) {

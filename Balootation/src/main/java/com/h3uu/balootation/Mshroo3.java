@@ -25,24 +25,24 @@ public class Mshroo3 {
     
     private static int countCardSuit(ArrayList<Card> playerCards, int cardType){
         int counter = 0;
-        for (int i = 0; i < playerCards.size(); i++)
-            if(playerCards.get(i).getSuit() == cardType)
+        for (Card playerCard : playerCards)
+            if (playerCard.getSuit() == cardType)
                 counter++;
         return counter;
     }
     
     private static ArrayList<Card> getCardSuit(ArrayList<Card> playerCards, int cardType){
         ArrayList<Card> cards = new ArrayList<>();
-        for (int i = 0; i < playerCards.size(); i++)
-            if(playerCards.get(i).getSuit() == cardType)
-                cards.add(playerCards.get(i));
+        for (Card playerCard : playerCards)
+            if (playerCard.getSuit() == cardType)
+                cards.add(playerCard);
 
         return cards;
     }
     
     private static ArrayList<Card> getConsecutiveCards(ArrayList<Card> playerCards, int numberOfConsecutiveCards){
         
-        ArrayList<Card> consecutiveCards = new ArrayList();
+        ArrayList<Card> consecutiveCards = new ArrayList<>();
         
         int count = 1;
         int CardRank = playerCards.get(0).getRank();
@@ -194,12 +194,12 @@ public class Mshroo3 {
     
     public static ArrayList<Mshroo3> findAllMshroo3(ArrayList<Card> cards, int gameType){
         // a list to be returned after the method finished
-        ArrayList<Mshroo3> mshare3 = new ArrayList();
+        ArrayList<Mshroo3> mshare3 = new ArrayList<>();
         
-        // make copy of the arraylist to moddify later
-        ArrayList<Card> playerCards = new ArrayList<Card>();
-        for (int i = 0; i < cards.size(); i++) {
-            playerCards.add(cards.get(i));
+        // make copy of the arraylist to modify later
+        ArrayList<Card> playerCards = new ArrayList<>();
+        for (Card card : cards) {
+            playerCards.add(card);
         }
         
         // check for baloot if it was hokom
@@ -210,16 +210,16 @@ public class Mshroo3 {
                 case GameType.HOKM_CLUBS:
                     
                     counter = 0;
-                    ArrayList<Card> clubsBaloot = new ArrayList();
-                    for (int i = 0; i < playerCards.size(); i++) {
-                        if(playerCards.get(i).getRank() == Card.CLUBS){
-                            if(playerCards.get(i).getSuit() == Card.QUEEN){
+                    ArrayList<Card> clubsBaloot = new ArrayList<>();
+                    for (Card playerCard : playerCards) {
+                        if (playerCard.getRank() == Card.CLUBS) {
+                            if (playerCard.getSuit() == Card.QUEEN) {
                                 counter++;
-                                clubsBaloot.add(playerCards.get(i));
+                                clubsBaloot.add(playerCard);
                             }
-                            if(playerCards.get(i).getSuit() == Card.KING){
+                            if (playerCard.getSuit() == Card.KING) {
                                 counter++;
-                                clubsBaloot.add(playerCards.get(i));
+                                clubsBaloot.add(playerCard);
                             }
                         }
                     }
@@ -231,16 +231,16 @@ public class Mshroo3 {
                 case GameType.HOKM_DIAMONDS:
                     
                     counter = 0;
-                    ArrayList<Card> diamondBaloot = new ArrayList();
-                    for (int i = 0; i < playerCards.size(); i++) {
-                        if(playerCards.get(i).getRank() == Card.DIAMODS){
-                            if(playerCards.get(i).getSuit() == Card.QUEEN){
+                    ArrayList<Card> diamondBaloot = new ArrayList<>();
+                    for (Card playerCard : playerCards) {
+                        if (playerCard.getRank() == Card.DIAMODS) {
+                            if (playerCard.getSuit() == Card.QUEEN) {
                                 counter++;
-                                diamondBaloot.add(playerCards.get(i));
+                                diamondBaloot.add(playerCard);
                             }
-                            if(playerCards.get(i).getSuit() == Card.KING){
+                            if (playerCard.getSuit() == Card.KING) {
                                 counter++;
-                                diamondBaloot.add(playerCards.get(i));
+                                diamondBaloot.add(playerCard);
                             }
                         }
                     }
@@ -252,16 +252,16 @@ public class Mshroo3 {
                 case GameType.HOKM_HEARTS:
                     
                     counter = 0;
-                    ArrayList<Card> heartBaloot = new ArrayList();
-                    for (int i = 0; i < playerCards.size(); i++) {
-                        if(playerCards.get(i).getRank() == Card.HEARTS){
-                            if(playerCards.get(i).getSuit() == Card.QUEEN){
+                    ArrayList<Card> heartBaloot = new ArrayList<>();
+                    for (Card playerCard : playerCards) {
+                        if (playerCard.getRank() == Card.HEARTS) {
+                            if (playerCard.getSuit() == Card.QUEEN) {
                                 counter++;
-                                heartBaloot.add(playerCards.get(i));
+                                heartBaloot.add(playerCard);
                             }
-                            if(playerCards.get(i).getSuit() == Card.KING){
+                            if (playerCard.getSuit() == Card.KING) {
                                 counter++;
-                                heartBaloot.add(playerCards.get(i));
+                                heartBaloot.add(playerCard);
                             }
                         }
                     }
@@ -273,16 +273,16 @@ public class Mshroo3 {
                 case GameType.HOKM_SPADES:
                     
                     counter = 0;
-                    ArrayList<Card> SpadesBaloot = new ArrayList();
-                    for (int i = 0; i < playerCards.size(); i++) {
-                        if(playerCards.get(i).getRank() == Card.SPADES){
-                            if(playerCards.get(i).getSuit() == Card.QUEEN){
+                    ArrayList<Card> SpadesBaloot = new ArrayList<>();
+                    for (Card playerCard : playerCards) {
+                        if (playerCard.getRank() == Card.SPADES) {
+                            if (playerCard.getSuit() == Card.QUEEN) {
                                 counter++;
-                                SpadesBaloot.add(playerCards.get(i));
+                                SpadesBaloot.add(playerCard);
                             }
-                            if(playerCards.get(i).getSuit() == Card.KING){
+                            if (playerCard.getSuit() == Card.KING) {
                                 counter++;
-                                SpadesBaloot.add(playerCards.get(i));
+                                SpadesBaloot.add(playerCard);
                             }
                         }
                     }

@@ -77,15 +77,15 @@ public class Card implements Comparable{
     
     public void advanceCurrentToFinish(int speed){
         if(this.currentPoint.x < this.FinishPoint.x){
-            this.currentPoint.x = (this.currentPoint.x+speed > this.FinishPoint.x) ? this.FinishPoint.x : this.currentPoint.x+speed;
+            this.currentPoint.x = Math.min(this.currentPoint.x + speed, this.FinishPoint.x);
         }else if(this.currentPoint.x > this.FinishPoint.x){
-            this.currentPoint.x = (this.currentPoint.x-speed < this.FinishPoint.x) ? this.FinishPoint.x : this.currentPoint.x-speed;
+            this.currentPoint.x = Math.max(this.currentPoint.x - speed, this.FinishPoint.x);
         }
         
         if(this.currentPoint.y < this.FinishPoint.y){
-            this.currentPoint.y = (this.currentPoint.y+speed > this.FinishPoint.y) ? this.FinishPoint.y : this.currentPoint.y+speed;
+            this.currentPoint.y = Math.min(this.currentPoint.y + speed, this.FinishPoint.y);
         }else if(this.currentPoint.y > this.FinishPoint.y){
-            this.currentPoint.y = (this.currentPoint.y-speed < this.FinishPoint.y) ? this.FinishPoint.y : this.currentPoint.y-speed;
+            this.currentPoint.y = Math.max(this.currentPoint.y - speed, this.FinishPoint.y);
         }
     }
     
