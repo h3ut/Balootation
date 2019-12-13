@@ -1,5 +1,9 @@
 package com.h3uu.balootation;
 
+import com.h3uu.balootation.card.Card;
+import com.h3uu.balootation.card.Rank;
+import com.h3uu.balootation.card.Suit;
+
 import java.util.ArrayList;
 
 /**
@@ -23,7 +27,7 @@ public class Mshroo3 {
     }
     
     
-    private static int countCardSuit(ArrayList<Card> playerCards, int cardType){
+    private static int countCardSuit(ArrayList<Card> playerCards, Suit cardType){
         int counter = 0;
         for (Card playerCard : playerCards)
             if (playerCard.getSuit() == cardType)
@@ -31,7 +35,7 @@ public class Mshroo3 {
         return counter;
     }
     
-    private static ArrayList<Card> getCardSuit(ArrayList<Card> playerCards, int cardType){
+    private static ArrayList<Card> getCardSuit(ArrayList<Card> playerCards, Suit cardType){
         ArrayList<Card> cards = new ArrayList<>();
         for (Card playerCard : playerCards)
             if (playerCard.getSuit() == cardType)
@@ -45,12 +49,12 @@ public class Mshroo3 {
         ArrayList<Card> consecutiveCards = new ArrayList<>();
         
         int count = 1;
-        int CardRank = playerCards.get(0).getRank();
+        Rank CardRank = playerCards.get(0).getRank();
         Card prevCard = playerCards.get(0);
         for (int i = 1; i < playerCards.size() - 1; i++) {
             
             if(playerCards.get(i).getRank() == CardRank){
-                if(prevCard.getSuit() - playerCards.get(i).getSuit() == 1){
+                if(prevCard.getSuit().getValue() - playerCards.get(i).getSuit().getValue() == 1){
                     count++;
                     prevCard = playerCards.get(i);
                 }else{
@@ -77,11 +81,11 @@ public class Mshroo3 {
     
     private static boolean checkFor400(ArrayList<Card> playerCards, ArrayList<Mshroo3> mshare3){
         //check for 400
-        int countAces = countCardSuit(playerCards, Card.ACE);
+        int countAces = countCardSuit(playerCards, Suit.ACE);
         
         if(countAces == 4){
             // there is 400 in hand
-            ArrayList<Card> aces = getCardSuit(playerCards, Card.ACE);
+            ArrayList<Card> aces = getCardSuit(playerCards, Suit.ACE);
             
             playerCards.removeAll(aces);
             mshare3.add(new Mshroo3(aces, Mshroo3.m400));
@@ -95,11 +99,11 @@ public class Mshroo3 {
         boolean foundMshroo3 = false;
         
         // check for 4 Kings
-        int counter = countCardSuit(playerCards, Card.KING);
+        int counter = countCardSuit(playerCards, Suit.KING);
         
         if(counter == 4){
             // there are 4 kings (100)
-            ArrayList<Card> kings = getCardSuit(playerCards, Card.KING);
+            ArrayList<Card> kings = getCardSuit(playerCards, Suit.KING);
             
             playerCards.removeAll(kings);
             mshare3.add(new Mshroo3(kings, Mshroo3.m100));
@@ -107,11 +111,11 @@ public class Mshroo3 {
         }
         
         // check for 4 Queens
-        counter = countCardSuit(playerCards, Card.QUEEN);
+        counter = countCardSuit(playerCards, Suit.QUEEN);
         
         if(counter == 4){
             // there are 4 queens (100)
-            ArrayList<Card> queens = getCardSuit(playerCards, Card.QUEEN);
+            ArrayList<Card> queens = getCardSuit(playerCards, Suit.QUEEN);
             
             playerCards.removeAll(queens);
             mshare3.add(new Mshroo3(queens, Mshroo3.m100));
@@ -119,11 +123,11 @@ public class Mshroo3 {
         }
         
         // check for 4 jacks
-        counter = countCardSuit(playerCards, Card.JACK);
+        counter = countCardSuit(playerCards, Suit.JACK);
         
         if(counter == 4){
             // there are 4 jacks (100)
-            ArrayList<Card> jacks = getCardSuit(playerCards, Card.JACK);
+            ArrayList<Card> jacks = getCardSuit(playerCards, Suit.JACK);
             
             playerCards.removeAll(jacks);
             mshare3.add(new Mshroo3(jacks, Mshroo3.m100));
@@ -131,11 +135,11 @@ public class Mshroo3 {
         }
         
         // check for 4 tens
-        counter = countCardSuit(playerCards, Card.TEN);
+        counter = countCardSuit(playerCards, Suit.TEN);
         
         if(counter == 4){
             // there are 4 tens (100)
-            ArrayList<Card> tens = getCardSuit(playerCards, Card.TEN);
+            ArrayList<Card> tens = getCardSuit(playerCards, Suit.TEN);
             
             playerCards.removeAll(tens);
             mshare3.add(new Mshroo3(tens, Mshroo3.m100));
@@ -212,12 +216,12 @@ public class Mshroo3 {
                     counter = 0;
                     ArrayList<Card> clubsBaloot = new ArrayList<>();
                     for (Card playerCard : playerCards) {
-                        if (playerCard.getRank() == Card.CLUBS) {
-                            if (playerCard.getSuit() == Card.QUEEN) {
+                        if (playerCard.getRank() == Rank.CLUBS) {
+                            if (playerCard.getSuit() == Suit.QUEEN) {
                                 counter++;
                                 clubsBaloot.add(playerCard);
                             }
-                            if (playerCard.getSuit() == Card.KING) {
+                            if (playerCard.getSuit() == Suit.KING) {
                                 counter++;
                                 clubsBaloot.add(playerCard);
                             }
@@ -233,12 +237,12 @@ public class Mshroo3 {
                     counter = 0;
                     ArrayList<Card> diamondBaloot = new ArrayList<>();
                     for (Card playerCard : playerCards) {
-                        if (playerCard.getRank() == Card.DIAMODS) {
-                            if (playerCard.getSuit() == Card.QUEEN) {
+                        if (playerCard.getRank() == Rank.DIAMONDS) {
+                            if (playerCard.getSuit() == Suit.QUEEN) {
                                 counter++;
                                 diamondBaloot.add(playerCard);
                             }
-                            if (playerCard.getSuit() == Card.KING) {
+                            if (playerCard.getSuit() == Suit.KING) {
                                 counter++;
                                 diamondBaloot.add(playerCard);
                             }
@@ -254,12 +258,12 @@ public class Mshroo3 {
                     counter = 0;
                     ArrayList<Card> heartBaloot = new ArrayList<>();
                     for (Card playerCard : playerCards) {
-                        if (playerCard.getRank() == Card.HEARTS) {
-                            if (playerCard.getSuit() == Card.QUEEN) {
+                        if (playerCard.getRank() == Rank.HEARTS) {
+                            if (playerCard.getSuit() == Suit.QUEEN) {
                                 counter++;
                                 heartBaloot.add(playerCard);
                             }
-                            if (playerCard.getSuit() == Card.KING) {
+                            if (playerCard.getSuit() == Suit.KING) {
                                 counter++;
                                 heartBaloot.add(playerCard);
                             }
@@ -275,12 +279,12 @@ public class Mshroo3 {
                     counter = 0;
                     ArrayList<Card> SpadesBaloot = new ArrayList<>();
                     for (Card playerCard : playerCards) {
-                        if (playerCard.getRank() == Card.SPADES) {
-                            if (playerCard.getSuit() == Card.QUEEN) {
+                        if (playerCard.getRank() == Rank.SPADES) {
+                            if (playerCard.getSuit() == Suit.QUEEN) {
                                 counter++;
                                 SpadesBaloot.add(playerCard);
                             }
-                            if (playerCard.getSuit() == Card.KING) {
+                            if (playerCard.getSuit() == Suit.KING) {
                                 counter++;
                                 SpadesBaloot.add(playerCard);
                             }

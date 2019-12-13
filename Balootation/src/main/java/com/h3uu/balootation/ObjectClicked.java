@@ -1,6 +1,6 @@
 package com.h3uu.balootation;
 
-import com.h3uu.balootation.Card;
+import com.h3uu.balootation.card.Card;
 
 /**
  *

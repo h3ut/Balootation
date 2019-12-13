@@ -1,5 +1,9 @@
 package com.h3uu.balootation;
 
+import com.h3uu.balootation.card.Card;
+import com.h3uu.balootation.card.Rank;
+import com.h3uu.balootation.card.Suit;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -19,16 +23,16 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     private final String imagesPath = "/cardsimages/";
     private ArrayList<Card> cards;
     private Image coveredImage;
-    ArrayList<Card> PlayerMe;
-    ArrayList<Card> PlayerThemFirst;
-    ArrayList<Card> PlayerFriend;
-    ArrayList<Card> PlayerThemSecond;
+    private ArrayList<Card> PlayerMe;
+    private ArrayList<Card> PlayerThemFirst;
+    private ArrayList<Card> PlayerFriend;
+    private ArrayList<Card> PlayerThemSecond;
     
     // players hands
-    Card playedByPlayerMe;
-    Card playedByPlayerThemFirst;
-    Card playedByPlayerFriend;
-    Card playedByPlayerThemSecond;
+    private Card playedByPlayerMe;
+    private Card playedByPlayerThemFirst;
+    private Card playedByPlayerFriend;
+    private Card playedByPlayerThemSecond;
 
     // Score
     private int us,them;
@@ -40,7 +44,7 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
 
     
     // communicate with main class
-    ObjectClicked anythingClicked;
+    private ObjectClicked anythingClicked;
     
     // Drawing constants
     private final int padding = 20;
@@ -393,41 +397,17 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
 
 
     private void fillTheDeck(){
-        cards.add(new Card(Card.CLUBS,Card.ACE,new ImageIcon(getClass().getResource(imagesPath + "ac.gif"))));
-        cards.add(new Card(Card.CLUBS,Card.SEVEN,new ImageIcon(getClass().getResource(imagesPath + "7c.gif"))));
-        cards.add(new Card(Card.CLUBS,Card.EIGHT,new ImageIcon(getClass().getResource(imagesPath + "8c.gif"))));
-        cards.add(new Card(Card.CLUBS,Card.NINE,new ImageIcon(getClass().getResource(imagesPath + "9c.gif"))));
-        cards.add(new Card(Card.CLUBS,Card.TEN,new ImageIcon(getClass().getResource(imagesPath + "tc.gif"))));
-        cards.add(new Card(Card.CLUBS,Card.JACK,new ImageIcon(getClass().getResource(imagesPath + "jc.gif"))));
-        cards.add(new Card(Card.CLUBS,Card.QUEEN,new ImageIcon(getClass().getResource(imagesPath + "qc.gif"))));
-        cards.add(new Card(Card.CLUBS,Card.KING,new ImageIcon(getClass().getResource(imagesPath + "kc.gif"))));
 
-        cards.add(new Card(Card.DIAMODS,Card.ACE,new ImageIcon(getClass().getResource(imagesPath + "ad.gif"))));
-        cards.add(new Card(Card.DIAMODS,Card.SEVEN,new ImageIcon(getClass().getResource(imagesPath + "7d.gif"))));
-        cards.add(new Card(Card.DIAMODS,Card.EIGHT,new ImageIcon(getClass().getResource(imagesPath + "8d.gif"))));
-        cards.add(new Card(Card.DIAMODS,Card.NINE,new ImageIcon(getClass().getResource(imagesPath + "9d.gif"))));
-        cards.add(new Card(Card.DIAMODS,Card.TEN,new ImageIcon(getClass().getResource(imagesPath + "td.gif"))));
-        cards.add(new Card(Card.DIAMODS,Card.JACK,new ImageIcon(getClass().getResource(imagesPath + "jd.gif"))));
-        cards.add(new Card(Card.DIAMODS,Card.QUEEN,new ImageIcon(getClass().getResource(imagesPath + "qd.gif"))));
-        cards.add(new Card(Card.DIAMODS,Card.KING,new ImageIcon(getClass().getResource(imagesPath + "kd.gif"))));
+        for(Rank rank: Rank.values()){
+            for(Suit suit: Suit.values()){
 
-        cards.add(new Card(Card.SPADES,Card.ACE,new ImageIcon(getClass().getResource(imagesPath + "as.gif"))));
-        cards.add(new Card(Card.SPADES,Card.SEVEN,new ImageIcon(getClass().getResource(imagesPath + "7s.gif"))));
-        cards.add(new Card(Card.SPADES,Card.EIGHT,new ImageIcon(getClass().getResource(imagesPath + "8s.gif"))));
-        cards.add(new Card(Card.SPADES,Card.NINE,new ImageIcon(getClass().getResource(imagesPath + "9s.gif"))));
-        cards.add(new Card(Card.SPADES,Card.TEN,new ImageIcon(getClass().getResource(imagesPath + "ts.gif"))));
-        cards.add(new Card(Card.SPADES,Card.JACK,new ImageIcon(getClass().getResource(imagesPath + "js.gif"))));
-        cards.add(new Card(Card.SPADES,Card.QUEEN,new ImageIcon(getClass().getResource(imagesPath + "qs.gif"))));
-        cards.add(new Card(Card.SPADES,Card.KING,new ImageIcon(getClass().getResource(imagesPath + "ks.gif"))));
-
-        cards.add(new Card(Card.HEARTS,Card.ACE,new ImageIcon(getClass().getResource(imagesPath + "ah.gif"))));
-        cards.add(new Card(Card.HEARTS,Card.SEVEN,new ImageIcon(getClass().getResource(imagesPath + "7h.gif"))));
-        cards.add(new Card(Card.HEARTS,Card.EIGHT,new ImageIcon(getClass().getResource(imagesPath + "8h.gif"))));
-        cards.add(new Card(Card.HEARTS,Card.NINE,new ImageIcon(getClass().getResource(imagesPath + "9h.gif"))));
-        cards.add(new Card(Card.HEARTS,Card.TEN,new ImageIcon(getClass().getResource(imagesPath + "th.gif"))));
-        cards.add(new Card(Card.HEARTS,Card.JACK,new ImageIcon(getClass().getResource(imagesPath + "jh.gif"))));
-        cards.add(new Card(Card.HEARTS,Card.QUEEN,new ImageIcon(getClass().getResource(imagesPath + "qh.gif"))));
-        cards.add(new Card(Card.HEARTS,Card.KING,new ImageIcon(getClass().getResource(imagesPath + "kh.gif"))));
+                if(suit.getValue() <= 6){
+                    continue;
+                }
+                String path = String.format("%s%s-%s.gif", imagesPath, rank.toString(), suit.toString());
+                cards.add(new Card(rank, suit,new ImageIcon(getClass().getResource(path))));
+            }
+        }
     }
 
     private void getShraImages(){
