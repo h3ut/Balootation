@@ -57,11 +57,10 @@ public class Mshroo3 {
             if(playerCards.get(i).getRank() == CardRank){
                 if(prevCard.getSuit().getValue() - playerCards.get(i).getSuit().getValue() == 1){
                     count++;
-                    prevCard = playerCards.get(i);
                 }else{
                     count = 1;
-                    prevCard = playerCards.get(i);
                 }
+                prevCard = playerCards.get(i);
             }else{
                 count = 1;
                 prevCard = playerCards.get(i);
@@ -98,58 +97,25 @@ public class Mshroo3 {
     
     private static boolean checkFor100(ArrayList<Card> playerCards, ArrayList<Mshroo3> mshare3){
         boolean foundMshroo3 = false;
-        
-        // check for 4 Kings
-        int counter = countCardSuit(playerCards, Suit.KING);
-        
-        if(counter == 4){
-            // there are 4 kings (100)
-            ArrayList<Card> kings = getCardSuit(playerCards, Suit.KING);
-            
-            playerCards.removeAll(kings);
-            mshare3.add(new Mshroo3(kings, Mshroo3.m100));
-            foundMshroo3 = true;
+
+        // suits that will be checked if the play have 4 of them (100)
+        Suit[] suits = new Suit[]{
+                Suit.KING, Suit.QUEEN, Suit.JACK, Suit.TEN
+        };
+
+        for(Suit suit: suits){
+            int counter = countCardSuit(playerCards, suit);
+            if(counter == 4){
+                // there are 4 of this suit (100)
+                ArrayList<Card> cardsFound = getCardSuit(playerCards, suit);
+
+                playerCards.removeAll(cardsFound);
+                mshare3.add(new Mshroo3(cardsFound, Mshroo3.m100));
+                foundMshroo3 = true;
+            }
         }
-        
-        // check for 4 Queens
-        counter = countCardSuit(playerCards, Suit.QUEEN);
-        
-        if(counter == 4){
-            // there are 4 queens (100)
-            ArrayList<Card> queens = getCardSuit(playerCards, Suit.QUEEN);
-            
-            playerCards.removeAll(queens);
-            mshare3.add(new Mshroo3(queens, Mshroo3.m100));
-            foundMshroo3 = true;
-        }
-        
-        // check for 4 jacks
-        counter = countCardSuit(playerCards, Suit.JACK);
-        
-        if(counter == 4){
-            // there are 4 jacks (100)
-            ArrayList<Card> jacks = getCardSuit(playerCards, Suit.JACK);
-            
-            playerCards.removeAll(jacks);
-            mshare3.add(new Mshroo3(jacks, Mshroo3.m100));
-            foundMshroo3 = true;
-        }
-        
-        // check for 4 tens
-        counter = countCardSuit(playerCards, Suit.TEN);
-        
-        if(counter == 4){
-            // there are 4 tens (100)
-            ArrayList<Card> tens = getCardSuit(playerCards, Suit.TEN);
-            
-            playerCards.removeAll(tens);
-            mshare3.add(new Mshroo3(tens, Mshroo3.m100));
-            foundMshroo3 = true;
-        }
-        
-        
+
         // check for 5 consecutive cards
-        
         ArrayList<Card> consecutiveCards = getConsecutiveCards(playerCards, 5);
         if(consecutiveCards != null){
             playerCards.removeAll(consecutiveCards);
@@ -203,10 +169,8 @@ public class Mshroo3 {
         
         // make copy of the arraylist to modify later
         ArrayList<Card> playerCards = new ArrayList<>();
-        for (Card card : cards) {
-            playerCards.add(card);
-        }
-        
+        playerCards.addAll(cards);
+
         // check for baloot if it was hokom
         if(gameType != GameType.SUN){
             
