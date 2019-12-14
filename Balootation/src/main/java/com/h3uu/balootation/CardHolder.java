@@ -1,63 +1,55 @@
 package com.h3uu.balootation;
 
 import com.h3uu.balootation.card.Card;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  *
  * @author RedDragon
  */
-public class CardHolder {
 
-    private ArrayList<ArrayList<Card>> cards;
+@Data
+public class CardHolder {
+    private List<Hand> hands;
     private ArrayList<ArrayList<Mshroo3>> mshare3;
-    
-    public CardHolder(ArrayList<ArrayList<Card>> cards) {
-        this.cards = cards;
+
+    public CardHolder(List<Hand> hands){
+        this.hands = hands;
     }
     
-    
     public void sort(){
-        Collections.sort(cards.get(0));
-        Collections.sort(cards.get(1));
-        Collections.sort(cards.get(2));
-        Collections.sort(cards.get(3));
+        for(Hand hand: this.hands) hand.sort();
     }
     
     public void calculateMshare3(int gameType){
         mshare3 = new ArrayList<>();
-        
-        mshare3.add(Mshroo3.findAllMshroo3(cards.get(0), gameType));
-        mshare3.add(Mshroo3.findAllMshroo3(cards.get(1), gameType));
-        mshare3.add(Mshroo3.findAllMshroo3(cards.get(2), gameType));
-        mshare3.add(Mshroo3.findAllMshroo3(cards.get(3), gameType));
+        for(Hand hand: this.hands) {
+            mshare3.add(Mshroo3.findAllMshroo3(hand.getCards(), gameType));
+        }
     }
-    
-    
-    public ArrayList<ArrayList<Card>> getCardsAll(){
-        return cards;
-    }
-    
+
     public ArrayList<ArrayList<Mshroo3>> getMshare3(){
         return mshare3;
     }
     
-    public ArrayList<Card> getCardsMe(){
-        return cards.get(0);
+    public List<Card> getCardsMe(){
+        return hands.get(0).getCards();
     }
     
-    public ArrayList<Card> getCardsThemFirst(){
-        return cards.get(1);
+    public List<Card> getCardsThemFirst(){
+        return hands.get(1).getCards();
     }
     
-    public ArrayList<Card> getCardsFriend(){
-        return cards.get(2);
+    public List<Card> getCardsFriend(){
+        return hands.get(2).getCards();
     }
     
-    public ArrayList<Card> getCardsThemSecond(){
-        return cards.get(3);
+    public List<Card> getCardsThemSecond(){
+        return hands.get(3).getCards();
     }
     
     

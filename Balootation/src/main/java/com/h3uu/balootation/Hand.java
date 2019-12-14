@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -25,4 +26,7 @@ public class Hand {
         this.cards.addAll(card);
     }
 
+    public void sort(){
+        Collections.sort(this.cards);
+    }
 }

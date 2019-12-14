@@ -11,6 +11,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -22,10 +23,10 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
 
     private final String imagesPath = "/cardsimages/";
     private Image coveredImage;
-    private ArrayList<Card> PlayerMe;
-    private ArrayList<Card> PlayerThemFirst;
-    private ArrayList<Card> PlayerFriend;
-    private ArrayList<Card> PlayerThemSecond;
+    private List<Card> PlayerMe;
+    private List<Card> PlayerThemFirst;
+    private List<Card> PlayerFriend;
+    private List<Card> PlayerThemSecond;
     
     // players hands
     private Card playedByPlayerMe;
@@ -317,16 +318,16 @@ public class GraphicsEngine extends JPanel implements Runnable, MouseListener{
     }
     
     
-    public void setPlayerMe(ArrayList<Card> p){
+    public void setPlayerMe(List<Card> p){
         this.PlayerMe = p;
     }
-    public void setPlayerFriend(ArrayList<Card> p){
+    public void setPlayerFriend(List<Card> p){
         this.PlayerFriend = p;
     }
-    public void setPlayerThemFirst(ArrayList<Card> p){
+    public void setPlayerThemFirst(List<Card> p){
         this.PlayerThemFirst = p;
     }
-    public void setPlayerThemSecond(ArrayList<Card> p){
+    public void setPlayerThemSecond(List<Card> p){
         this.PlayerThemSecond = p;
         this.repaint();
     }

@@ -5,6 +5,7 @@ import com.h3uu.balootation.card.Rank;
 import com.h3uu.balootation.card.Suit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -196,7 +197,7 @@ public class Mshroo3 {
         return true;
     }
     
-    public static ArrayList<Mshroo3> findAllMshroo3(ArrayList<Card> cards, int gameType){
+    public static ArrayList<Mshroo3> findAllMshroo3(List<Card> cards, int gameType){
         // a list to be returned after the method finished
         ArrayList<Mshroo3> mshare3 = new ArrayList<>();
         

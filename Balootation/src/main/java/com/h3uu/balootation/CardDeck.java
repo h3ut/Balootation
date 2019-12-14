@@ -47,9 +47,9 @@ public class CardDeck {
 
 
     public List<Card> deal(int numberOfCards){
-        List<Card> cards = new ArrayList<>();
-        new ArrayList<>();
-        return new ArrayList<>(this.deck.subList(this.cardsDealt, Math.min(this.cardsDealt++ + numberOfCards, this.deck.size())));
+        ArrayList<Card> cards = new ArrayList<>(this.deck.subList(this.cardsDealt, Math.min(this.cardsDealt + numberOfCards, this.deck.size())));
+        this.cardsDealt += numberOfCards;
+        return cards;
     }
 
     public Card dealOneCard(){
