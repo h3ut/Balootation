@@ -35,17 +35,7 @@ public class Baloot {
         CardHolder cardHolder = CardDealer.dealCardsNormal(deck, 3);
         CardDealer.dealRestOfCardsNormal(cardHolder, deck, 3, 0);
 
-//        ArrayList<ArrayList<Card>> dealed = CardDealer.dealCardsNormal(graph.getCards(), 3);
-//        CardDealer.dealRestOfCardsNormal(graph.getCards(), dealed, 3);
-
-
         graph.setAllPlayers(cardHolder);
-//        graph.setPlayerMe(dealed.get(0));
-//        graph.setPlayerThemFirst(dealed.get(1));
-//        graph.setPlayerFriend(dealed.get(2));
-//        graph.setPlayerThemSecond(dealed.get(3));
-
-
 
         while(true){
 
@@ -54,7 +44,6 @@ public class Baloot {
             CardShuffler.threeAces(deck);
             cardHolder = CardDealer.dealCardsNormal(deck, 3);
 
-            //CardDealer.dealRestOfCardsNormal(cardHolder, graph.getCards(), 3, 0);
             graph.setPlayedByPlayerMe(deck.getDeck().get(20));
 
             cardHolder.sort();
