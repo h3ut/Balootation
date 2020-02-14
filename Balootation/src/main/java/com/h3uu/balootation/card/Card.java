@@ -1,5 +1,8 @@
 package com.h3uu.balootation.card;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.Image;
 import java.awt.Point;
 import javax.swing.ImageIcon;
@@ -7,51 +10,31 @@ import javax.swing.ImageIcon;
 /*
  * @author Talal Al-Mutairi 
  */
+
+@Getter @Setter
 public class Card implements Comparable{
     private final Suit suit;
     private final Rank rank;
-    private final Image image;
+    private Image image;
     
     // drawing position
     private Point currentPoint = new Point(0,0);
     private Point FinishPoint = new Point(0,0);
     private int Zlevel = 0;
     
-    
+
+    public Card(Rank rank,Suit suit){
+        this.suit = suit;
+        this.rank = rank;
+    }
+
     public Card(Rank rank,Suit suit,ImageIcon imageLocation){
         this.suit = suit;
         this.rank = rank;
         image = imageLocation.getImage();
     }
 
-    public Image getImage() {
-        return image;
-    }
-    
-    public Rank getRank() {
-        return rank;
-    }
 
-    public Suit getSuit() {
-        return suit;
-    }
-
-    public Point getCurrentPoint(){
-        return this.currentPoint;
-    }
-    
-    public Point getFinishPoint(){
-        return this.FinishPoint;
-    }
-    
-    public void setCurrentPoint(Point p){
-        this.currentPoint = p;
-    }
-    
-    public void setFinishPoint(Point p){
-        this.FinishPoint = p;
-    }
-    
     public void advanceCurrentToFinish(int speed){
         if(this.currentPoint.x < this.FinishPoint.x){
             this.currentPoint.x = Math.min(this.currentPoint.x + speed, this.FinishPoint.x);
@@ -65,7 +48,12 @@ public class Card implements Comparable{
             this.currentPoint.y = Math.max(this.currentPoint.y - speed, this.FinishPoint.y);
         }
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        Card that = (Card) o;
+        return this.getRank().equals(((Card) o).getRank()) && this.getSuit().equals(((Card) o).getSuit());
+    }
 
     @Override
     public String toString() {
