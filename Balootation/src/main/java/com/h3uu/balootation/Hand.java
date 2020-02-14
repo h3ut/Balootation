@@ -2,8 +2,6 @@ package com.h3uu.balootation;
 
 import com.h3uu.balootation.card.Card;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Collections;
