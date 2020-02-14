@@ -51,8 +51,11 @@ public class Card implements Comparable{
 
     @Override
     public boolean equals(Object o) {
+        if(this.getClass() != o.getClass()){
+            return false;
+        }
         Card that = (Card) o;
-        return this.getRank().equals(((Card) o).getRank()) && this.getSuit().equals(((Card) o).getSuit());
+        return this.getRank().equals(that.getRank()) && this.getSuit().equals(that.getSuit());
     }
 
     @Override
